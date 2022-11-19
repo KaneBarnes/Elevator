@@ -15,4 +15,10 @@ public final class RobotMap {
     public static final int PIVOT_PISTON_SOLENOID_PCM_A = 2;
     public static final int PIVOT_PISTON_SOLENOID_PCM_B = 3;
   }
+
+  public static final class mapControllers {
+
+    public static final int DRIVER_CONTROLLER = 0;
+    public static final int SWITCHBOARD = 2;
+  }
 }

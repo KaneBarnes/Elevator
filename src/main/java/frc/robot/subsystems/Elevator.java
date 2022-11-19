@@ -2,14 +2,19 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+// Last updated 11/19/22 - 2:54pm
+
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+import com.frcteam3255.preferences.SN_DoublePreference;
 import com.frcteam3255.utils.SN_InstantCommand;
 import com.frcteam3255.utils.SN_Math;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -55,10 +60,27 @@ public class Elevator extends SubsystemBase {
 
     elevatorMotor.configReverseSoftLimitEnable(false);
     elevatorMotor.configForwardSoftLimitEnable(true);
-    elevatorMotor.configForwardSoftLimitThreshold(prefElevator.elevatorAngledMaxPos.getValue());
+    elevatorMotor.configForwardSoftLimitThreshold(prefElevator.elevatorMaxPos.getValue());
 
     elevatorMotor.setNeutralMode(NeutralMode.Brake);
     elevatorMotor.setInverted(constElevator.INVERTED);
+  }
+
+  public void setElevatorPosition(double a_position) {
+
+    double position = a_position;
+
+    // Stop
+    // Will insert elevator prefs in place of numbers
+    position = MathUtil.clamp(position, 0, 10);
+
+    // Demand = Required Encoder Count
+    elevatorMotor.set(ControlMode.Position, position);
+  }
+
+  public void setElevatorPosition(SN_DoublePreference a_position) {
+
+    setElevatorPosition(a_position.getValue());
   }
 
   public void setElevatorSpeed(double a_speed) {

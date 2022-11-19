@@ -4,10 +4,15 @@
 
 package frc.robot;
 
+import com.frcteam3255.joystick.SN_F310Gamepad;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.RobotMap.mapControllers;
 import frc.robot.commands.PositionElevator;
+import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -21,12 +26,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final PositionElevator m_autoCommand = new PositionElevator();
+  private final SN_F310Gamepad conDriver = new SN_F310Gamepad(mapControllers.DRIVER_CONTROLLER);
+  private final Elevator subElevator = new Elevator();
 
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
   public RobotContainer() {
     // Configure the button bindings
+    subElevator.setDefaultCommand(new RunCommand(() -> subElevator.setElevatorSpeed(conDriver.getAxisLSY())));
+
     configureButtonBindings();
   }
 
@@ -39,6 +45,39 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+    // Climber
+
+    // Button assigned controls
+    // Number equal to encoder counts
+
+    conDriver.btn_A
+        .whenPressed(() -> subElevator.setElevatorPosition(0));
+
+    conDriver.btn_Y
+        .whenPressed(() -> subElevator.setElevatorPosition(69420));
+
+    // Manual control
+
+    conDriver.btn_RStick
+        .whenPressed(() -> subElevator.setElevatorSpeed(0.1))
+        .whenReleased(() -> subElevator.setElevatorSpeed(0));
+
+    conDriver.btn_LStick
+        .whenPressed(() -> subElevator.setElevatorSpeed(-0.1))
+        .whenReleased(() -> subElevator.setElevatorSpeed(0));
+
+    // Controllers
+
+    conDriver.btn_Start
+        .whenPressed(() -> subElevator.resetElevatorEncoderCounts());
+
+    conDriver.btn_LBump
+        .whenPressed(() -> subElevator.hideValuesOnDashboard());
+
+    conDriver.btn_RBump
+        .whenPressed(() -> subElevator.displayValuesOnDashboard());
+
   }
 
   /**
