@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap.mapElevator;
 import frc.robot.RobotPreferences.prefElevator;
+import frc.robot.RobotPreferences;
 import frc.robot.Constants.constElevator;;
 
 public class Elevator extends SubsystemBase {
@@ -69,7 +70,7 @@ public class Elevator extends SubsystemBase {
 
     // Stop
     // Will insert elevator prefs in place of numbers
-    position = MathUtil.clamp(position, 0, 10);
+    position = MathUtil.clamp(position, 0, 107000);
 
     // Demand = Required Encoder Count
     elevatorMotor.set(ControlMode.Position, position);

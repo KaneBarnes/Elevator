@@ -22,7 +22,7 @@ public final class RobotPreferences {
                 public static final SN_DoublePreference elevatorClosedLoopSpeed = new SN_DoublePreference(
                                 "elevatorClosedLoopSpeed", 1);
                 public static final SN_DoublePreference elevatorAllowableClosedLoopError = new SN_DoublePreference(
-                                "elevatorAllowableClosedLoopError", 0);
+                                "elevatorAllowableClosedLoopError", 1000);
 
                 public static final SN_DoublePreference elevatorMinPos = new SN_DoublePreference(
                                 "elevatorMinPos", 0);
