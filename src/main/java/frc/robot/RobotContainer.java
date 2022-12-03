@@ -31,7 +31,8 @@ public class RobotContainer {
 
   public RobotContainer() {
     // Configure the button bindings
-    subElevator.setDefaultCommand(new RunCommand(() -> subElevator.setElevatorSpeed(conDriver.getAxisLSY())));
+    subElevator
+        .setDefaultCommand(new RunCommand(() -> subElevator.setElevatorSpeed(conDriver.getAxisLSY()), subElevator));
 
     configureButtonBindings();
   }

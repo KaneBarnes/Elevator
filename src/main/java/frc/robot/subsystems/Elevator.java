@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.frcteam3255.preferences.SN_DoublePreference;
-import com.frcteam3255.utils.SN_InstantCommand;
 import com.frcteam3255.utils.SN_Math;
 
 import edu.wpi.first.math.MathUtil;
@@ -43,8 +42,6 @@ public class Elevator extends SubsystemBase {
 
     displayOnDashboard = true;
   }
-
-  private final Elevator subElevator = new Elevator();
 
   public void configure() {
     config.slot0.kP = prefElevator.elevatorP.getValue();
@@ -141,8 +138,5 @@ public class Elevator extends SubsystemBase {
     if (isMinSwitch()) {
       resetElevatorEncoderCounts();
     }
-
-    SmartDashboard.putData(
-        "Configue Elevator", new SN_InstantCommand(subElevator::configure, true, subElevator));
   }
 }
