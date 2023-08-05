@@ -124,7 +124,6 @@ public class Elevator extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // This method will be called once per scheduler run
     if (getElevatorEncoderCounts() > prefElevator.elevatorSlowdownMinThresholdEncoderCounts.getValue()
         && getElevatorEncoderCounts() < prefElevator.elevatorSlowdownMaxThresholdEncoderCounts.getValue()) {
       elevatorMotor.configClosedLoopPeakOutput(0, prefElevator.elevatorSlowdownSpeed.getValue());
