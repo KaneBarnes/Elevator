@@ -68,7 +68,6 @@ public class Elevator extends SubsystemBase {
 
     double position = a_position;
 
-    // Stop
     // Will insert elevator prefs in place of numbers
     position = MathUtil.clamp(position, 0, 107000);
 
@@ -123,6 +122,7 @@ public class Elevator extends SubsystemBase {
 
   @Override
   public void periodic() {
+    
     // This method will be called once per scheduler run
     if (getElevatorEncoderCounts() > prefElevator.elevatorSlowdownMinThresholdEncoderCounts.getValue()
         && getElevatorEncoderCounts() < prefElevator.elevatorSlowdownMaxThresholdEncoderCounts.getValue()) {
