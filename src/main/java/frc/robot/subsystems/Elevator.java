@@ -90,7 +90,7 @@ public class Elevator extends SubsystemBase {
       speed = 0;
     }
 
-    // cannot ever go below min switch
+    // cannot ever go above max switch
     if ((isMaxSwitch() && speed > 0)) {
       speed = 0;
     }
